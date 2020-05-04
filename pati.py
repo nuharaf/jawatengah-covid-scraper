@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 def scrape():
-    text = requests.get("https://covid19.patikab.go.id/v2/").text
+    text = requests.get("https://covid19.patikab.go.id/v2/",timeout=10).text
     soup = BeautifulSoup(text,'lxml')
     kv = dict()
     pdp = soup.find("th",string="Total PDP").findParent("table")
