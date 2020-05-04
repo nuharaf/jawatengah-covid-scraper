@@ -9,12 +9,12 @@ def scrape():
     kv = dict()
 
     odp = soup.find(
-        "div", id="diagrambarstatusodp39").parent.find_next_sibling("div")
+        "div", id=re.compile("diagrambarstatusodp")).parent.find_next_sibling("div")
     t = odp.find(string=re.compile("ODP")).parent.text.strip().split(" ")
     kv["odp_pantauan"] = int(t[1])
 
     pdp = soup.find(
-        "div", id="diagrambarstatuspdp39").parent.find_next_sibling("div")
+        "div", id=re.compile("diagrambarstatuspdp")).parent.find_next_sibling("div")
     t = pdp.find("th", string=re.compile(r"PDP \d+")
                  ).parent.text.strip().split(" ")
     kv["pdp_total"] = int(t[1])
@@ -26,7 +26,7 @@ def scrape():
         "p", string="PDP Meninggal Dunia").find_previous_sibling().text.strip())
 
     covid = soup.find(
-        "div", id="diagrambarstatuskonfirmasi39").parent.find_next_sibling("div")
+        "div", id=re.compile("diagrambarstatuskonfirmasi")).parent.find_next_sibling("div")
     t = covid.find("th", string=re.compile(r"Konfirmasi \d+")
                  ).parent.text.strip().split(" ")
     kv["covid_total"] = int(t[1])
